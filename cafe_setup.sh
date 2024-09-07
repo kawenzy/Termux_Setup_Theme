@@ -46,8 +46,8 @@ echo "Setting up code editor with nvim..."
 pkg install neovim
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 
-mkdir -p ~/.termux/font
-cd ~/.termux/font
+mkdir -p ~/fontnerd
+cd ~/fontnerd
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
 unzip JetBrainsMono.zip
 cp JetBrainsMonoNerdFont-Bold.ttf ~/.termux/font.ttf
