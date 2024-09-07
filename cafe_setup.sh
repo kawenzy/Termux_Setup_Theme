@@ -1,5 +1,6 @@
-echo """
+#!/bin/bash
 
+echo """
                                                   
 ,------. ,--.                        ,---.        
 |  .--. '`--',--.  ,--.,---. ,--,--./  .-' ,---.  
@@ -9,47 +10,50 @@ echo """
                                                   
 
 """
-#startup
-echo "starting setup..."
 
-#update system
-echo "update repository"
+# Startup
+echo "Starting setup..."
+
+# Update system
+echo "Updating repository..."
 pkg update
 pkg upgrade
 
-#installing system for requirements
-echo "install system..."
+# Installing system requirements
+echo "Installing system requirements..."
 pkg install wget
 pkg install curl
 pkg install git
 pkg install root-repo
 pkg install x11-repo
 
-#clear terminal
-echo "clear cache..."
+# Clear terminal
+echo "Clearing cache..."
 clear
 
-#general language everyday
-echo "general language setup...."
+# General language setup
+echo "Setting up general languages..."
 pkg install nodejs
 pkg install python3
 pkg install ruby
 
-#clear terminal
-echo "clear cache..."
+# Clear terminal
+echo "Clearing cache..."
 clear
 
-#setup code editor for mobile/tablet
-echo "setup code editor with nvim...."
+# Setup code editor for mobile/tablet
+echo "Setting up code editor with nvim..."
 pkg install neovim
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
-mkdir fontnerd
-cd fontnerd
+
+mkdir -p ~/.termux/font
+cd ~/.termux/font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
 unzip JetBrainsMono.zip
 cp JetBrainsMonoNerdFont-Bold.ttf ~/.termux/font.ttf
+
 touch ~/.termux/colors.properties
-echo """
+cat <<EOF > ~/.termux/colors.properties
 background=#0e1019
 foreground=#fffaf4
 cursor=#fffaf4
@@ -69,28 +73,32 @@ color11=#ffd242
 color12=#0092ff
 color13=#9a5feb
 color14=#67fff0
-color15=#ffffff """ >> ~/.termux/colors.properties
+color15=#ffffff
+EOF
 
-
-#clear terminal
+# Clear terminal
 clear
 
-#setup theme termux
-echo "theme setup...."
+# Setup theme for Termux
+echo "Setting up theme..."
 pkg install starship
-if [-d "~/.config"]; then
-  echo "folder already but you must create json theme"
-  touch ~/.config/starship.toml
+
+if [ -d "~/.config" ]; then
+  echo "Folder already exists, but you must create the json theme."
 else
-  mkdir -p ~/.config && touch ~/.config/starship.toml
+  mkdir -p ~/.config
+fi
+
+touch ~/.config/starship.toml
 starship preset pastel-powerline -o ~/.config/starship.toml
-touch .bashrc
-echo """
+
+touch ~/.bashrc
+cat <<EOF >> ~/.bashrc
 export STARSHIP_CONFIG=~/.config/starship.toml
+eval "\$(starship init bash)"
+EOF
 
-eval "$(starship init bash)" """ >> ~/.bashrc
-
-#clear terminal
+# Clear terminal
 clear
 
 echo """
@@ -104,5 +112,5 @@ echo """
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 """
 
-echo "install is succes.."
-echo "Thank you for using it"
+echo "Installation is successful."
+echo "Thank you for using it."
