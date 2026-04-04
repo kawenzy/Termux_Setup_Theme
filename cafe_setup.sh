@@ -11,7 +11,7 @@ echo """
 
 """
 
-# Startup
+# Startup 
 echo "Starting setup..."
 
 # Update system
