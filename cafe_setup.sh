@@ -77,6 +77,7 @@ color15=#ffffff
 EOF
 
 # Clear terminal
+echo "Clearing cache..."
 clear
 
 # Setup theme for Termux
@@ -99,7 +100,13 @@ eval "\$(starship init bash)"
 EOF
 
 # Clear terminal
+echo "Clearing cache..."
 clear
+
+# setup fish
+echo "Fish setup"
+pkg install fish
+chsh -s fish
 
 echo """
 ┏━━━┓━━━━━━━━━━━━━━━━━━━━
